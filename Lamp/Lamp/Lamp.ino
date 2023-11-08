@@ -32,6 +32,17 @@ void loop() {
   HM10.listen();
   HM10.setTimeout(100);
 
+  if (HM10.available()) {
+    appData = HM10.read();
+    appString = String(appData);
+    if (appString == "C") {
+      LampOnOff = true;
+      Bluetooth = true;
+      LEDBright = 255;
+      Serial.println("Off");
+    }
+  }
+
   if (digitalRead(13) == LOW) {
     Bluetooth = !Bluetooth;
     Serial.println("Bluetooth,OK");
